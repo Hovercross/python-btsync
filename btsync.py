@@ -166,6 +166,57 @@ class BTSync(object):
             params['secret'] = secret
         return self._request(params)
 
+    def get_os(self):
+        """
+        Returns OS name where BitTorrent Sync is running.
+        """ 
+        
+        params = {'method': 'get_os'}
+        return self._request(params)
+        
+    def get_version(self):
+        """
+        Returns BitTorrent Sync version.
+        """
+        
+        params = {'method': 'get_version'}
+        return self._request(params)
+
+    def get_speed(self):
+        """
+        Returns current upload and download speed.
+        """
+
+        params = {'method': 'get_speed'}
+        return self._request(params)
+
+    def shutdown(self):
+        """
+        Gracefully stops Sync.
+        """
+
+        params = {'method': 'shutdown'}
+        return self._request(params)
+
+    def get_prefs(self):
+        """
+        Returns BitTorrent Sync preferences. Contains dictionary with advanced preferences. 
+        Please see Sync user guide for description of each option.
+        """
+        
+        params = {'method': 'get_prefs'}
+        return self._request(params)
+
+    def set_prefs(self, **prefs):
+        """
+        Sets BitTorrent Sync preferences. Parameters are the same as in 'Get preferences'. 
+        Advanced preferences are set as general settings. Returns current settings.
+        """
+        
+        params = {'method': 'set_prefs'}
+        params.update(prefs)
+        return self._request(params)
+
     def _request(self, params):
         params = urllib.urlencode(params)
         self.conn.request('GET', '/api?' + params, '', self.headers)

@@ -55,12 +55,12 @@ btsync.request({'method': 'get_folder_peers', 'secret': '<yoursecret>'})
 * [ ] Set folder preferences
 * [ ] Get folder hosts
 * [ ] Set folder hosts
-* [ ] Get preferences
-* [ ] Set preferences
-* [ ] Get OS name
-* [ ] Get version
-* [ ] Get speed
-* [ ] Shutdown
+* [X] Get preferences
+* [X] Set preferences
+* [X] Get OS name
+* [X] Get version
+* [X] Get speed
+* [X] Shutdown
 
 
 Notes

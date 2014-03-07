@@ -217,6 +217,50 @@ class BTSync(object):
         params.update(prefs)
         return self._request(params)
 
+    def get_folder_peers(self, secret):
+        """
+        Returns list of peers connected to the specified folder.
+        """
+        
+        params = {'method': 'get_folder_peers', 'secret': secret}
+        return self._request(params)
+    
+    def get_folder_prefs(self, secret):
+        """
+        Returns preferences for the specified sync folder.
+        """
+        
+        params = {'method': 'get_folder_prefs', 'secret': secret}
+        return self._request(params)
+
+    def set_folder_prefs(self, secret, **prefs):
+        """
+        Sets preferences for the specified sync folder. Parameters are the same as in ‘Get folder preferences’. Returns current settings.
+        """
+
+        params = {'method': 'set_folder_prefs', 'secret': secret} 
+        params.update(prefs)
+        return self._request(params)
+   
+    def set_folder_hosts(self, secret, *hosts):
+        """
+        Sets one or several predefined hosts for the specified sync folder. Existing list of hosts will be replaced. 
+        Returns current hosts if set successfully, error code otherwise.
+        """
+        
+        if hosts:
+            params = {'method': 'set_folder_hosts', 'secret': secret, 'hosts': ",".join(hosts)}
+        else:
+            params = {'method': 'set_folder_hosts', 'secret': secret, 'hosts': ""}
+        return self._request(params)
+    
+    def get_folder_hosts(self, secret):
+        """
+        Returns list of predefined hosts for the folder, or error code if a secret is not specified.
+        """
+        params = {'method': 'get_folder_hosts', 'secret': secret}
+        return self._request(params)
+        
     def _request(self, params):
         params = urllib.urlencode(params)
         self.conn.request('GET', '/api?' + params, '', self.headers)
